@@ -1,15 +1,14 @@
 package com.cms;
 
+import jakarta.servlet.ServletContext;
+import org.apache.commons.dbcp2.BasicDataSource;
+
 import java.sql.Connection;
-import java.sql.DriverManager;
 
 public class DBUtil {
-    private static final String URL = "jdbc:mariadb://localhost:3306/cms";
-    private static final String USER = "root";
-    private static final String PASS = "Ijse1234";     
-
-    public static Connection getConnection() throws Exception {
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        return DriverManager.getConnection(URL, USER, PASS);
+    public static Connection getConnection(ServletContext context) throws Exception {
+        BasicDataSource ds = (BasicDataSource) context.getAttribute("DBCPDataSource");
+        if(ds != null) return ds.getConnection();
+        else throw new Exception("DataSource not initialized!");
     }
 }
