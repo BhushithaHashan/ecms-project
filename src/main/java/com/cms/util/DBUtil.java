@@ -1,4 +1,4 @@
-package com.cms;
+package com.cms.util;
 
 import jakarta.servlet.ServletContext;
 import org.apache.commons.dbcp2.BasicDataSource;
